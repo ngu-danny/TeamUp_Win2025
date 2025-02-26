@@ -3,42 +3,19 @@
 import Link from "next/link";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { auth } from "../../../data/firebase/config";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { LoginErrorHandler } from "../../error-handler";
+import { useState } from "react";
 
 export default function LoginPage() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // Uses Firebase's method of signing in
-  const handleSignIn = async () => {
-    try {
-      setLoading(true);
-      await signInWithEmailAndPassword(auth, form.email, form.password);
-    } catch (error) {
-      console.error(error);
-      setError(LoginErrorHandler(error));
-      setLoading(false);
-    }
+  const handleRegister = async () => {
+    setLoading(true);
+    router.push(`/logged-out/login`);
   };
-
-  // Monitors if user is signed in, if so, redirects to home page
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push(`/`);
-      }
-    });
-
-    return unsub;
-  }, [auth]);
 
   return (
     <div className="flex flex-row w-screen h-screen">
@@ -60,32 +37,24 @@ export default function LoginPage() {
           </Link>
         </p>
         {/*------------------------------- Login form -------------------------------*/}
-        <Form action={handleSignIn} className="my-8">
+        <Form action={handleRegister} className="my-8">
           <input
             type="email"
-            name="email"
             placeholder="Email"
-            value={form.email}
+            value={email}
             onChange={(e) => {
               setError("");
-              setForm((prev) => ({
-                ...prev,
-                [e.target.name]: e.target.value,
-              }));
+              setEmail(e.target.value);
             }}
             className="w-full text-black"
           />
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            value={form.password}
+            value={password}
             onChange={(e) => {
               setError("");
-              setForm((prev) => ({
-                ...prev,
-                [e.target.name]: e.target.value,
-              }));
+              setPassword(e.target.value);
             }}
             className="w-full text-black"
           />

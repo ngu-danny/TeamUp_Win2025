@@ -3,14 +3,7 @@
 import Link from "next/link";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { auth, db } from "../../../data/firebase/config";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { RegisterErrorHandler } from "../../error-handler";
+import { useState } from "react";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -25,55 +18,10 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // Uses Firebase's method of registering
   const handleRegister = async () => {
-    try {
-      setLoading(true);
-      // get user id after signing up
-      let uid = "";
-      await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      ).then((userCredential) => {
-        const user = userCredential.user;
-        uid = user.uid;
-      });
-      // create user document and push
-      const docData = {
-        firstname: form.firstName,
-        lastname: form.lastName,
-        instructor: isInstructor,
-        schoolid: form.schoolID,
-        classes: [],
-        archivedclasses: [],
-      };
-      const userCollection = doc(db, "users", uid);
-      await setDoc(userCollection, docData);
-    } catch (error) {
-      console.error(error);
-      setError(RegisterErrorHandler(error));
-      setLoading(false);
-    }
+    setLoading(true);
+    router.push(`/logged-out/login`);
   };
-
-  // Monitors if user is signed in, if so, redirects to home page
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // checks if user has registered and exists in database
-        const uid = user.uid;
-        const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-        // if user exists, redirect
-        if (docSnap.exists()) {
-          router.push(`/`);
-        }
-      }
-    });
-
-    return unsub;
-  }, [auth]);
 
   return (
     <div className="flex flex-row w-screen h-screen">
