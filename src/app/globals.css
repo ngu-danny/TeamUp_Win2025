@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  /* To change the color themes, please also adjust tailwind.config.ts*/
+  --color-app-theme: #4b2e83;
+  --color-app-dark: #2c2856;
+  --color-app-inverse: #ffffff;
+  --color-app-middle: #37326d;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --midground: #c0c0c0;
+  --app-theme: #4b2e83;
+  --app-dark: #2c2856;
+  --app-middle: #37326d;
+  --app-inverse: #ffffff;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1e1e1e;
+    --foreground: #ededed;
+  }
+}
+*/
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  display: flex;
+  flex-direction: row;
+  font-family: Lato, Geist, Arial sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+input {
+  border-radius: 0.5rem;
+  background-color: #e5e7eb;
+  color: #4b5563;
+  border-color: #4b5563;
+  border-width: 1px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+input:focus {
+  background-color: #ffffff;
+  outline-width: 2px;
+}
+
+button {
+  background-color: var(--app-theme);
+  color: var(--app-inverse);
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--app-dark);
+}
+
+button:disabled {
+  background-color: #6b7280;
+}
+
+.error {
+  padding: 0.625rem 0.625rem 0.625rem 0.3125rem;
+  display: block;
+  background: #fafafa;
+  color: #ff0000;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #ff0000;
+}
+
+.border-right {
+  border-right: 2px solid #d9d9d9;
+}
+
+.border-right-white {
+  border-right: 2px solid #ffffff;
+}
+
+.border-bottom {
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.profile-link {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 3rem;
+  padding-left: 2rem;
+}
+
+.button-bar {
+  display: flex;
+  flex-direction: row;
+  border-radius: 9999px;
+  padding: 0.75rem;
+}
+
+/*------------------------ Main Sidebar ------------------------*/
+.sidebar-button {
+  flex: none;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.sidebar-button:disabled {
+  background-color: var(--background);
+  color: var(--app-theme);
+  font-weight: 700;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.sidebar-button:hover:disabled {
+  background-color: var(--background);
+}
+
+/*------------------------ Class Sidebar ------------------------*/
+.class-sidebar-button {
+  width: 3rem;
+  height: 3rem;
+  margin: 0.5rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--app-theme);
+}
+
+.class-sidebar-button:hover {
+  background-color: var(--app-middle);
+}
+
+.class-sidebar-button:disabled {
+  background-color: var(--background);
+  color: var(--app-theme);
+  font-weight: 700;
+  margin-left: 1.5rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.add-button-pressed {
+  background-color: var(--background);
+  color: var(--app-theme);
+}
+
+.add-button-pressed:hover {
+  background-color: var(--midground);
+}
+
+/*------------------------ Inner Sidebar ------------------------*/
+.inner-sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: sticky;
+  text-align: center;
+  text-wrap: nowrap;
+  border-right-width: 2px;
+  border-color: #d9d9d9;
+  height: 100vh;
+  width: 20rem;
+  overflow-y: auto;
+  transition: all 1s;
+}
+
+.inner-sidebar-text {
+  transition: all 0.1s;
+}
+
+.inner-sidebar-button {
+  color: var(--foreground);
+  background-color: var(--background);
+  display: block;
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom-width: 2px;
+  border-color: #d9d9d9;
+}
+
+.inner-sidebar-button:hover {
+  background-color: #f2f2f2;
+}
+
+.inner-sidebar-button:disabled {
+  background-color: #d9d9d9;
+  font-weight: 700;
+}
+
+.expand-button {
+  position: absolute;
+  top: 1rem;
+  left: 23.75rem;
+  background-color: #d9d9d9;
+  transition: left 1s;
+  animation-duration: 0.7s;
+}
+
+.active {
+  transform: rotate(180deg);
+}
+
+@keyframes rotate-to-180 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate-to-360 {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*------------------------ Goals Page ------------------------*/
+.goals-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr 0.5fr 0.5fr 0.2fr;
+  margin: 2rem 2rem 5rem 2rem;
+  text-align: center;
+}
+
+.goals-grid-header {
+  height: 3rem;
+  width: 100%;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.goals-grid-header > h2 {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.goals-grid-header > h3 {
+  margin-top: 1rem;
+}
+
+.goals-grid-goalowner {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 4rem;
+  padding-left: 2rem;
+}
+
+.goals-grid-statuspriority {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  font-weight: 550;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.goals-grid-statuspriority .modified-text {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 13rem;
+  padding: 0 1rem;
+  color: var(--app-inverse);
+  background-color: var(--foreground);
+  text-align: center;
+  border-radius: 0.5rem;
+  margin-top: 5rem;
+  font-size: 0.75rem;
+}
+
+.goals-grid-statuspriority:hover .modified-text {
+  display: flex;
+  visibility: visible;
+}
+
+.priority-high,
+.status-notdone {
+  background-color: #ff7a7a;
+  border-bottom: 2px solid #ffffff;
+}
+
+.priority-med,
+.status-pending {
+  background-color: #fae87e;
+  border-bottom: 2px solid #ffffff;
+}
+
+.priority-low,
+.status-done {
+  background-color: #a8ffa8;
+  border-bottom: 2px solid #ffffff;
+}
+
+/*------------------------ Calendar Page ------------------------*/
+.calendar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  height: 100%;
+}
+
+.calendar-label {
+  text-align: center;
+  border-top: 2px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9;
+  align-content: center;
+}
+
+.calendar-day {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  border-bottom: 2px solid #d9d9d9;
+  padding: 1rem;
+}
+
+.today {
+  background-color: #d9d9d9;
+}
+
+.invalid-day {
+  background-color: #f2f2f2;
+}
+
+.calendar-event {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  min-height: 0.5rem;
+  max-height: 1rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  color: var(--app-inverse);
+  margin: 0.25rem 0;
+}
+
+.calendar-event .event-text {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 1.75rem;
+  padding: 0 1rem;
+  color: var(--app-inverse);
+  border-radius: 0.5rem;
+  position: absolute;
+  z-index: 1;
+}
+
+.calendar-event:hover .event-text {
+  display: flex;
+  visibility: visible;
+}
