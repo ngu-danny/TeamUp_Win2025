@@ -5,6 +5,8 @@ Currently still in development.
 
 For more information on the structure of the project and specific to dos, please read the [About section](#about).
 
+For a runnable version of this application without needing Firebase, check the static branch.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 # IMPORTANT
@@ -13,7 +15,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 or create a public shared account.
 
 For detailed information on how the project's URLs are structured, please read [`Routing Fundamentals`](https://nextjs.org/docs/app/building-your-application/routing),
-in particular [`Route Groups`](https://nextjs.org/docs/app/building-your-application/routing/route-groups).\
+in particular [`Route Groups`](https://nextjs.org/docs/app/building-your-application/routing/route-groups).
 
 # RUNNING THE PROJECT
 
